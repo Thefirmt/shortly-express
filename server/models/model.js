@@ -33,11 +33,11 @@ class Model {
    */
   getAll(options) {
     if (!options) {
-      let queryString = `SELECT * FROM ${this.tablename}`;
+      let queryString = `SELECT * FROM ${Users.tablename}`;
       return executeQuery(queryString);
     }
     let parsedOptions = parseData(options);
-    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedOptions.string.join(' AND ')}`;
+    let queryString = `SELECT * FROM ${Users.tablename} WHERE ${parsedOptions.string.join(' AND ')}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
