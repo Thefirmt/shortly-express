@@ -93,13 +93,17 @@ app.post('/login',
   (req, res, next) =>{
     return models.Users.get({ username: 'samantha'})
       .then((record)=> {
-        models.Users.compare(req.body.password, record.password, record.salt);
+        return models.Users.compare(req.body.password, record.password, record.salt);
       })
-      .then((boolean) =>{
-        res.redirect(200, '/');
+      .then((data) =>{
+        if (data) {
+          res.redirect(200, '/');
+        } else {
+          res.redirect(404, '/login');
+        }
       })
       .catch(function(err) {
-        res.send(err);
+        res.redirect(404, '/login');
       }).done();
   });
 
